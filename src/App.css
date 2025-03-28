@@ -1,0 +1,16 @@
+body.light {
+    background-color: whitesmoke;
+    color: #181818;
+}
+body.dark {
+    background-color: #111111;
+    color: #fff;
+}
+body.light #trans-bg{
+    background-color: rgb(255, 255, 255);
+    color: #181818;
+}
+body.dark #trans-bg{
+    background-color: #1d1d1d;
+    color: #fff;
+}
