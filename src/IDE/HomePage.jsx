@@ -97,8 +97,27 @@ contract MyContract {
   setDraggingItem(null)
   }
   const removeCodeBlock = (id) => {
-    
+    // Find the item with the given ID
+    const x = targetItems.find(item => item.id === id);
+  
+    if (!x) return; // If item not found, exit function
+  
+    // Convert object to string
+    let text_content = JSON.stringify(x);
+  
+    // Split text into words
+    let words = text_content.split(' ');
+    let startWord = words[0];  
+    let lastWord = words[words.length - 1];
+  
+    // Remove the whole text from the first word to the last word
+    let regex = new RegExp(`\\b${startWord}.*${lastWord}\\b`, "g");
+    setCode(prevCode => prevCode.replace(regex, '').trim());
+  
+    // Delete from drop area
+    setTargetItems(targetItems.filter(item => item.id !== id));
   };
+
   // Function to generate a random color based on index
   const deploy=()=>{
     const formdata  = code
@@ -136,7 +155,7 @@ contract MyContract {
         <div className="border-r border-l border-b border-gray-700 p-2">
           <Tabs value={activeTab} onValueChange={setActiveTab} orientation="vertical" className="h-full">
             <TabsList className="flex flex-col h-auto bg-transparent gap-1">
-              <TabsTrigger value="components" className="w-full justify-start gap-2 data-[state=active]:bg-gray-800" onClick={()=>setOpenAi(!openAi)}>
+              <TabsTrigger value="components" className="w-full justify-start gap-2 data-[state=active]:bg-gray-800" onClick={()=>{setOpenAi(!openAi); setOpenPreview(false)}}>
                 <Sparkles size={16} />
                 AI assist
               </TabsTrigger>
@@ -160,8 +179,11 @@ contract MyContract {
                     dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
                     onDragStart={() => onDragStart(item)}
                     onDragEnd={()=>onDragEnd(item.id)}
-                    whileDrag={{ scale: 1.05, zIndex: 1 }}
-                    className={`bg-gray-700 p-2 rounded-md shadow cursor-grab active:cursor-grabbing text-white text-sm`}
+                    whileDrag={{ scale: 1.05, zIndex: 4, position: 'absolute' }}
+                    style={{
+                      zIndex: 2,
+                    }}
+                    className={`bg-gray-700 p-2 rounded-md shadow cursor-grab active:cursor-grabbing text-white text-sm `}
                   >
                     {item.name}
                   </motion.div>
@@ -191,15 +213,15 @@ contract MyContract {
                   layoutId={item.id}
                   drag
                   dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-                  whileDrag={{ scale: 1.05, zIndex: 1 }}
-                  className={` p-2 w-[300px] text-white rounded-md shadow cursor-grab active:cursor-grabbing text-sm relative`}
+                  whileDrag={{ scale: 1.05, zIndex: 1, position: 'absolute' }}
+                  className={` p-2 w-[300px] text-white rounded-md shadow cursor-grab active:cursor-grabbing text-sm relative `}
                 >
                    <div
                 className='bg-gray-500 p-5 rounded-lg'
                 key={item.id}>
-                   <CircleX onClick={() => removeCodeBlock("function newFunction() public {}")} className='absolute top-0 left-0 text-gray-300 active:text-white'/>
+                   <CircleX onClick={() => removeCodeBlock(item.id)} className='absolute top-0 left-0 text-gray-300 active:text-white'/>
                   {item.name} <br />
-                <input type="text" placeholder='name' />
+                <input type="text" placeholder='name' className='px-2 text-black rounded py-1' />
                 </div>
                 </motion.div>
               ))}
