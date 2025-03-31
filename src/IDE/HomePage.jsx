@@ -3,14 +3,18 @@ import soliditySyntax from  './Syntax'
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Layout, Settings, PanelLeft, CircleX } from "lucide-react"
+import { Layout, Settings, PanelLeft, CircleX, Bot, Sparkles } from "lucide-react"
 import Preview from "./Preview"
 import { motion } from "framer-motion"
+import ChatBot from './ChatBot'
+import { useLocation } from 'react-router-dom'
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState("components")
   const [openPreview, setOpenPreview] = useState(false);
-  const [contractCode, setContractCode] = useState();
+  const [openAi, setOpenAi] = useState(false);
+  const  location = useLocation()
+  const data = location.state
   const [varName, setVarName]=useState('')
   const [code,  setCode] = useState(`
     // SPDX-License-Identifier: MIT
@@ -64,7 +68,6 @@ contract MyContract {
   const onDragStart = (item) => {
     setDraggingItem(item)
   }
-
   const onDragEnd = (id) => {
     if (!draggingItem) return
     // If the item was in the source container, clone it to the target
@@ -93,12 +96,10 @@ contract MyContract {
 
   setDraggingItem(null)
   }
-
   const removeCodeBlock = (id) => {
     
   };
   // Function to generate a random color based on index
-
   const deploy=()=>{
     const formdata  = code
     axios.post(`${api_enpoint}/deploy`, formdata).then(res=>{console.log('deploying');
@@ -107,30 +108,37 @@ contract MyContract {
       err=>  console.log(err)
     )
   }
+
+
+
   return (
     <div className="flex flex-col h-screen bg-black text-white">
       {/* Header */}
       <header className="flex justify-between items-center p-4 border border-gray-700">
-        <div className="text-lg font-medium">Builder</div>
+        <div className="text-lg font-medium flex gap-2 items-center"><Bot className="w-8 h-8 text-purple-500" />
+        <span className="text-white font-medium text-xl">i-contract</span></div>
         <div className="flex gap-2">
           <Button variant="outline" size="sm" onClick={deploy}>
             deploy
           </Button>
-          <Button variant="outline" size="sm" onClick={() => setOpenPreview(!openPreview)}>
+          <Button variant="outline" size="sm" onClick={() => {setOpenPreview(!openPreview); setOpenAi(false)}}>
             Preview code
           </Button>
         </div>
       </header>
 
       {/* Main content */}
-      <div className="flex overflow-hidden">
+      <div className="flex overflow-hidden relative">
+        {openAi &&(
+          <ChatBot contract_code={code}/>
+        )}
         {/* Tab list */}
         <div className="border-r border-l border-b border-gray-700 p-2">
           <Tabs value={activeTab} onValueChange={setActiveTab} orientation="vertical" className="h-full">
             <TabsList className="flex flex-col h-auto bg-transparent gap-1">
-              <TabsTrigger value="components" className="w-full justify-start gap-2 data-[state=active]:bg-gray-800">
-                <Layout size={16} />
-                Components
+              <TabsTrigger value="components" className="w-full justify-start gap-2 data-[state=active]:bg-gray-800" onClick={()=>setOpenAi(!openAi)}>
+                <Sparkles size={16} />
+                AI assist
               </TabsTrigger>
               <TabsTrigger value="layers" className="w-full justify-start gap-2 data-[state=active]:bg-gray-800">
                 <PanelLeft size={16} />

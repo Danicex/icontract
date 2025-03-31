@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Bot, Menu } from "lucide-react";
 import { motion } from "framer-motion";
 import {Link} from 'react-router-dom';
+import ConnectWallet from './ConnectWallet';
 
 export default function Navbar() {
   return (
@@ -24,23 +25,10 @@ export default function Navbar() {
         <NavLink href="/pricing">Pricing</NavLink>
       </div>
 
-      <div className="hidden md:flex items-center space-x-4">
-        <Link to={'/login'}>
-        <Button variant="ghost" className="text-white hover:text-purple-400">
-          Sign In
-        </Button>
-        </Link>
-
-        <Link to={'/register'}>
-        <Button className="bg-purple-600 hover:bg-purple-700 text-white">
-          Get Started
-        </Button>
-        </Link>
+      <div className=" md:flex items-center space-x-4">
+        <ConnectWallet/>
       </div>
 
-      <Button variant="ghost" size="icon" className="md:hidden text-white">
-        <Menu className="w-6 h-6" />
-      </Button>
     </motion.nav>
   );
 }
