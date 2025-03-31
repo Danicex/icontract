@@ -1,12 +1,53 @@
-# React + Vite
+# I-Contract: Low-Code Smart Contract Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+I-Contract is an innovative **low-code** smart contract builder designed to simplify the creation and deployment of smart contracts. With an intuitive **drag-and-drop** interface, users can seamlessly write and deploy contracts without requiring extensive blockchain development experience.
 
-Currently, two official plugins are available:
+## Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 🔹 Beginner-Friendly & Business-Oriented
+- Tailored for businesses and individuals with **little to no experience** in smart contract development.
+- Provides an easy-to-use platform for **learning and building** smart contracts.
 
-## Expanding the ESLint configuration
+### 🔹 AI-Powered Assistance
+- Integrated with **AI that analyzes the code** and offers real-time **insights and suggestions**.
+- Helps users improve contract **logic and security** while streamlining the development process.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🔹 Live Collaborative Coding
+- Enables **multiple users** to collaborate on a single smart contract project.
+- Supports **real-time editing and development** for efficient teamwork.
+
+### 🔹 Built-in Learning Hub
+- Includes a **"Learn" tab** featuring concise documentation to help users **understand Solidity** and smart contract development.
+
+## Why Use I-Contract?
+
+✅ **No coding skills required** – perfect for beginners and businesses.
+
+✅ **AI-driven insights** – ensures contract quality and security.
+
+✅ **Collaborative environment** – work with multiple developers.
+
+✅ **Quick deployment** – drag, drop, and deploy effortlessly.
+
+Whether you're a **business owner, a developer, or a beginner eager to learn**, I-Contract empowers you to create, customize, and deploy smart contracts with ease.
+
+## Get Started
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-username/i-contract.git
+   ```
+2. Follow the installation instructions in the `docs` folder.
+3. Start building and deploying smart contracts effortlessly!
+
+## Contributing
+We welcome contributions! Please read our **[Contributing Guidelines](CONTRIBUTING.md)** to get started.
+
+## License
+This project is licensed under the **MIT License** - see the **[LICENSE](LICENSE)** file for details.
+
+---
+
+### Stay Connected
+For updates and support, follow us on **[Twitter](#)** or join our **[Community Forum](#)**!
+
